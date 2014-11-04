@@ -7,8 +7,8 @@
 
 namespace Deployer;
 
-use Deployer\Task\TaskInterface;
-use Deployer\Server\ServerInterface;
+use Deployer\Server\ServerCollection;
+use Deployer\Task\TaskCollection;
 use Symfony\Component\Console\Application as Console;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -37,16 +37,14 @@ class Deployer
     private $output;
 
     /**
-     * Array of tasks where keys are tasks names.
-     * @var TaskInterface[]
+     * @var TaskCollection
      */
-    private $tasks = [];
+    public $tasks;
 
     /**
-     * Array of servers where keys are servers names.
-     * @var ServerInterface[]
+     * @var ServerCollection
      */
-    private $servers = [];
+    public $servers;
 
     /**
      * @param Console $app
@@ -112,75 +110,5 @@ class Deployer
     public function getConsole()
     {
         return $this->console;
-    }
-
-    /**
-     * @param TaskInterface $task
-     */
-    public function addTask(TaskInterface $task)
-    {
-        return $this->tasks[$task->getName()] = $task;
-    }
-
-    /**
-     * Return task by name.
-     * @param string $name
-     * @return TaskInterface
-     * @throws \RuntimeException if task does not defined.
-     */
-    public function getTask($name)
-    {
-        if ($this->hasTask($name)) {
-            return $this->tasks[$name];
-        } else {
-            throw new \RuntimeException("Task `$name` does not defined.");
-        }
-    }
-
-    /**
-     * @param string $name
-     * @return bool
-     */
-    public function hasTask($name)
-    {
-        return array_key_exists($name, $this->tasks);
-    }
-
-    /**
-     * @param ServerInterface $server
-     */
-    public function addServer(ServerInterface $server)
-    {
-        $this->servers[$server->getName()] = $server;
-    }
-
-    /**
-     * @return ServerInterface
-     * @throws \RuntimeException when server not found.
-     */
-    public function getServer($name)
-    {
-        if ($this->hasServer($name)) {
-            return $this->servers[$name];
-        } else {
-            throw new \RuntimeException("Server `$name` does not defined.");
-        }
-    }
-
-    /**
-     * @return ServerInterface[]
-     */
-    public function getServers()
-    {
-        return $this->servers;
-    }
-
-    /**
-     * @param string $name
-     * @return bool
-     */
-    public function hasServer($name)
-    {
-        return array_key_exists($name, $this->servers);
     }
 }

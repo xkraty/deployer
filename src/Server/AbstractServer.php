@@ -26,7 +26,7 @@ abstract class AbstractServer implements ServerInterface
     private $environment;
 
     /**
-     * @param string$name
+     * @param string $name
      * @param Configuration $configuration
      * @param Environment $environment
      */
@@ -35,38 +35,6 @@ abstract class AbstractServer implements ServerInterface
         $this->configuration = $configuration;
         $this->environment = $environment;
         $this->name = $name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function connect()
-    {
-        // TODO: Implement connect() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function run($command)
-    {
-        // TODO: Implement run() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function upload($local, $remote)
-    {
-        // TODO: Implement upload() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function download($local, $remote)
-    {
-        // TODO: Implement download() method.
     }
 
     /**

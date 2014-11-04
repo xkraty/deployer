@@ -10,10 +10,10 @@ namespace Deployer;
 use Deployer\Server\Configuration;
 use Deployer\Server\ServerInterface;
 
-class Environment
+class CurrentEnvironment
 {
     /**
-     * @var Environment
+     * @var CurrentEnvironment
      */
     private static $current;
 
@@ -34,7 +34,7 @@ class Environment
     }
 
     /**
-     * @param Environment $current
+     * @param CurrentEnvironment $current
      */
     public static function setCurrent($current)
     {
@@ -42,7 +42,7 @@ class Environment
     }
 
     /**
-     * @return Environment
+     * @return CurrentEnvironment
      */
     public static function getCurrent()
     {

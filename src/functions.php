@@ -5,7 +5,7 @@
  * file that was distributed with this source code.
  */
 use Deployer\Deployer;
-use Deployer\Environment;
+use Deployer\CurrentEnvironment;
 use Deployer\Server;
 use Deployer\Stage;
 use Deployer\Task;
@@ -326,11 +326,11 @@ function output()
 
 /**
  * Return current server env.
- * @return \Deployer\Environment
+ * @return \Deployer\CurrentEnvironment
  */
 function env()
 {
-    return Environment::getCurrent();
+    return CurrentEnvironment::getCurrent();
 }
 
 /**

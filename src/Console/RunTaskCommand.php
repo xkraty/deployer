@@ -8,7 +8,7 @@
 namespace Deployer\Console;
 
 use Deployer\Deployer;
-use Deployer\Environment;
+use Deployer\CurrentEnvironment;
 use Deployer\Server\DryRun;
 use Deployer\Server\ServerInterface;
 use Deployer\Stage\Stage;
@@ -158,7 +158,7 @@ class RunTaskCommand extends BaseCommand
             // Set server environment.
             $env = $server->getEnvironment();
             $env->set('working_path', $server->getConfiguration()->getPath());
-            Environment::setCurrent($env);
+            CurrentEnvironment::setCurrent($env);
 
             if (OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity()) {
                 $output->writeln("Run task <comment>$taskName</comment> on server <info>{$name}</info>");
