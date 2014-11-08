@@ -1,9 +1,9 @@
 <phpunit bootstrap="test/bootstrap.php">
     <testsuites>
-        <testsuite name="Deployer Source">
+        <testsuite name="Source">
             <directory>test/src/</directory>
         </testsuite>
-        <testsuite name="Deployer Recipes">
+        <testsuite name="Recipes">
             <directory>test/recipe/</directory>
         </testsuite>
     </testsuites>

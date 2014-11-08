@@ -72,19 +72,19 @@ class Scenario
     }
 
     /**
-     * @param Scenario $task
+     * @param Scenario $scenario
      */
-    public function addBefore(Scenario $task)
+    public function addBefore(Scenario $scenario)
     {
-        $this->before[] = $task;
+        array_unshift($this->before, $scenario);
     }
 
     /**
-     * @param Scenario $task
+     * @param Scenario $scenario
      */
-    public function addAfter(Scenario $task)
+    public function addAfter(Scenario $scenario)
     {
-        $this->after[] = $task;
+        array_push($this->after, $scenario);
     }
 
     /**
