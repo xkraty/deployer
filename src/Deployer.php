@@ -8,6 +8,7 @@
 namespace Deployer;
 
 use Deployer\Server\ServerCollection;
+use Deployer\Task\Scenario\ScenarioCollection;
 use Deployer\Task\TaskCollection;
 use Symfony\Component\Console\Application as Console;
 use Symfony\Component\Console\Input\InputInterface;
@@ -39,12 +40,17 @@ class Deployer
     /**
      * @var TaskCollection
      */
-    public $tasks;
+    private $tasks;
+
+    /**
+     * @var ScenarioCollection
+     */
+    private $scenarios;
 
     /**
      * @var ServerCollection
      */
-    public $servers;
+    private $servers;
 
     /**
      * @param Console $app
@@ -56,6 +62,9 @@ class Deployer
         $this->console = $console;
         $this->input = $input;
         $this->output = $output;
+        $this->tasks = new TaskCollection();
+        $this->servers = new ScenarioCollection();
+        $this->servers = new ServerCollection();
         self::$instance = $this;
     }
 
@@ -110,5 +119,29 @@ class Deployer
     public function getConsole()
     {
         return $this->console;
+    }
+
+    /**
+     * @return TaskCollection
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
+
+    /**
+     * @return ScenarioCollection
+     */
+    public function getScenarios()
+    {
+        return $this->scenarios;
+    }
+
+    /**
+     * @return ServerCollection
+     */
+    public function getServers()
+    {
+        return $this->servers;
     }
 }

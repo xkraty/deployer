@@ -13,10 +13,4 @@ interface TaskInterface
      * Run task.
      */
     public function run();
-
-    /**
-     * Return task name.
-     * @return string
-     */
-    public function getName();
-} 
+}

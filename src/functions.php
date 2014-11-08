@@ -7,8 +7,8 @@
 use Deployer\Deployer;
 use Deployer\CurrentEnvironment;
 use Deployer\Server;
-use Deployer\Stage;
 use Deployer\Task;
+use Deployer\Task\Scenario;
 use Deployer\Utils;
 
 /**
@@ -23,64 +23,61 @@ function server($name, $domain, $port = 22)
 }
 
 /**
- * @param string $defaultStage
- */
-function multistage($defaultStage = 'develop')
-{
-    Deployer::get()->setMultistage(true);
-    Deployer::get()->setDefaultStage($defaultStage);
-}
-
-/**
- * Define a new stage
- * @param string $name Name of current stage
- * @param array $servers List of servers
- * @param array $options List of addition options
- * @param bool $default Set as default stage
- * @return Stage\Stage
- */
-function stage($name, array $servers, array $options = array(), $default = false)
-{
-    return Stage\StageFactory::create($name, $servers, $options, $default);
-}
-
-/**
  * Define a new task and save to tasks list.
+ *
  * @param string $name Name of current task.
- * @param callable|array $body Callable task or array of names of other tasks.
- * @return \Deployer\Task
+ * @param callable|array $body Callable task or array of other tasks names.
+ * @return Task
  */
 function task($name, $body)
 {
-    return Deployer::get()->addTask($name, Task\TaskFactory::create($body, $name));
+    $deployer = Deployer::get();
+
+    if (is_callable($body)) {
+        $task = new Task($body);
+        $scenario = new Scenario($name);
+        $deployer->getTasks()->set($name, $task);
+    } else if (is_array($body)) {
+        $scenario = new Scenario\GroupScenario(array_map(function ($name) use ($deployer) {
+            return $deployer->getScenarios()->get($name);
+        }, $body));
+    } else {
+        throw new InvalidArgumentException('Task should be an closure or array of other tasks.');
+    }
+
+    $deployer->getScenarios()->set($name, $scenario);
+
+    return $scenario;
 }
 
 /**
- * Add $task to call before $name task runs.
- * @param string $name Name of task before which to call $task
- * @param callable|string|array $task
+ * Call that task before specified task runs.
+ *
+ * @param string $it
+ * @param string $that
  */
-function before($name, $task)
+function before($it, $that)
 {
-    $before = Deployer::get()->getTask($name);
+    $deployer = Deployer::get();
+    $beforeScenario = $deployer->getScenarios()->get($it);
+    $scenario = $deployer->getScenarios()->get($that);
 
-    if ($before instanceof Task\AbstractTask) {
-        $before->before(Task\TaskFactory::create($task));
-    }
+    $beforeScenario->addBefore($scenario);
 }
 
 /**
- * Add $task to call after $name task runs.
- * @param string $name Name of task after which to call $task
- * @param callable|string|array $task
+ * Call that task after specified task runs.
+ *
+ * @param string $it
+ * @param string $that
  */
-function after($name, $task)
+function after($it, $that)
 {
-    $after = Deployer::get()->getTask($name);
+    $deployer = Deployer::get();
+    $afterScenario = $deployer->getScenarios()->get($it);
+    $scenario = $deployer->getScenarios()->get($that);
 
-    if ($after instanceof Task\AbstractTask) {
-        $after->after(Task\TaskFactory::create($task));
-    }
+    $afterScenario->addAfter($scenario);
 }
 
 /**

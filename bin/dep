@@ -29,9 +29,9 @@ set_include_path(__DIR__ . '/../' . PATH_SEPARATOR . get_include_path());
 
 // Init Deployer
 $deployer = new \Deployer\Deployer(
-    new \Symfony\Component\Console\Application('Deployer', '3.0.0-beta'),
-    new \Symfony\Component\Console\Input\ArgvInput(),
-    new \Symfony\Component\Console\Output\ConsoleOutput()
+    $console = new \Symfony\Component\Console\Application('Deployer', '3.0.0-beta'),
+    $input = new \Symfony\Component\Console\Input\ArgvInput(),
+    $output = new \Symfony\Component\Console\Output\ConsoleOutput()
 );
 
 // Require current deploy.php script
@@ -45,8 +45,8 @@ if (is_file($deployFile) && is_readable($deployFile)) {
 $selfUpdate = new \KevinGH\Amend\Command('self-update');
 $selfUpdate->setDescription('Updates deployer.phar to the latest version');
 $selfUpdate->setManifestUri('https://raw.github.com/elfet/deployer/master/manifest.json');
-$deployer->getConsole()->add($selfUpdate);
-$deployer->getHelperSet()->set(new \KevinGH\Amend\Helper());
+$console->add($selfUpdate);
+$console->getHelperSet()->set(new \KevinGH\Amend\Helper());
 
 // Run Deployer
 $deployer->run();

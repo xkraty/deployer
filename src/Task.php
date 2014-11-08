@@ -5,16 +5,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Deployer\Task;
+namespace Deployer;
+
+use Deployer\Task\TaskInterface;
 
 class Task implements TaskInterface
 {
-    /**
-     * Task name.
-     * @var string
-     */
-    private $name;
-
     /**
      * Task code.
      * @var callable
@@ -25,9 +21,8 @@ class Task implements TaskInterface
      * @param string $name Task name.
      * @param callable $callback Task code.
      */
-    public function __construct($name, \Closure $callback)
+    public function __construct(\Closure $callback)
     {
-        $this->name = $name;
         $this->callback = $callback;
     }
 
@@ -37,13 +32,5 @@ class Task implements TaskInterface
     public function run()
     {
         call_user_func($this->callback);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 }
