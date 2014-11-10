@@ -7,6 +7,8 @@
 
 namespace Deployer\Task;
 
+use Deployer\Task\Scenario\Scenario;
+
 class ScenarioTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreation()

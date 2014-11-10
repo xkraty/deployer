@@ -7,9 +7,7 @@
 
 namespace Deployer\Collection;
 
-use Traversable;
-
-class AbstractCollection implements CollectionInterface
+class Collection implements CollectionInterface
 {
     public $collection = [];
 
@@ -21,7 +19,7 @@ class AbstractCollection implements CollectionInterface
         if ($this->has($name)) {
             return $this->collection[$name];
         } else {
-            throw new \Exception("Object `$name` does not exist.");
+            throw new \RuntimeException("Object `$name` does not exist.");
         }
     }
 

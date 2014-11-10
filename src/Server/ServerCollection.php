@@ -7,11 +7,11 @@
 
 namespace Deployer\Server;
 
-use Deployer\Collection\AbstractCollection;
+use Deployer\Collection\Collection;
 
 /**
  * @method ServerInterface get($name)
  */
-class ServerCollection extends AbstractCollection
+class ServerCollection extends Collection
 {
 }

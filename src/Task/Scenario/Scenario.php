@@ -5,7 +5,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Deployer\Task;
+namespace Deployer\Task\Scenario;
 
 use Deployer\Task\Scenario\ScenarioCollection;
 

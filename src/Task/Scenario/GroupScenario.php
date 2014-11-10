@@ -7,7 +7,7 @@
 
 namespace Deployer\Task\Scenario;
 
-use Deployer\Task\Scenario;
+use Deployer\Task\Scenario\Scenario;
 use Deployer\Task\TaskCollection;
 
 class GroupScenario extends Scenario

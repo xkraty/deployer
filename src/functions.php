@@ -7,8 +7,8 @@
 use Deployer\Deployer;
 use Deployer\CurrentEnvironment;
 use Deployer\Server;
-use Deployer\Task;
-use Deployer\Task\Scenario;
+use Deployer\Task\Task;
+use Deployer\Task\Scenario\Scenario;
 use Deployer\Utils;
 
 /**

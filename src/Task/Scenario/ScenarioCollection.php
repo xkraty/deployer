@@ -7,12 +7,12 @@
 
 namespace Deployer\Task\Scenario;
 
-use Deployer\Collection\AbstractCollection;
-use Deployer\Task\Scenario;
+use Deployer\Collection\Collection;
+use Deployer\Task\Scenario\Scenario;
 
 /**
  * @method Scenario get($name)
  */
-class ScenarioCollection extends AbstractCollection
+class ScenarioCollection extends Collection
 {
 }

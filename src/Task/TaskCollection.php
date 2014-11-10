@@ -7,11 +7,11 @@
 
 namespace Deployer\Task;
 
-use Deployer\Collection\AbstractCollection;
+use Deployer\Collection\Collection;
 
 /**
  * @method TaskInterface get($name)
  */
-class TaskCollection extends AbstractCollection
+class TaskCollection extends Collection
 {
 } 
