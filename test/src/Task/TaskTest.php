@@ -22,5 +22,8 @@ class TaskTest extends \PHPUnit_Framework_TestCase
         });
 
         $task->run();
+
+        $task->desc('Task description.');
+        $this->assertEquals('Task description.', $task->getDescription());
     }
 }

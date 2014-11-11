@@ -15,9 +15,6 @@ class ScenarioTest extends \PHPUnit_Framework_TestCase
     {
         $scenario = new Scenario('task');
         $this->assertEquals(['task'], $scenario->getTasks());
-
-        $scenario->desc('Task description.');
-        $this->assertEquals('Task description.', $scenario->getDescription());
     }
 
     public function testBeforeAndAfter()

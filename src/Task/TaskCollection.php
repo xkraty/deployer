@@ -10,7 +10,7 @@ namespace Deployer\Task;
 use Deployer\Collection\Collection;
 
 /**
- * @method TaskInterface get($name)
+ * @method Task get($name)
  */
 class TaskCollection extends Collection
 {

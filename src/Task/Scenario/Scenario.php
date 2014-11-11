@@ -17,12 +17,6 @@ class Scenario
     private $taskName;
 
     /**
-     * Scenario description.
-     * @var string
-     */
-    private $description;
-
-    /**
      * @var Scenario[]
      */
     private $after = [];
@@ -50,25 +44,6 @@ class Scenario
             [$this->taskName],
             $this->getAfter()
         );
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set scenario description.
-     * @param string $description
-     * @return $this
-     */
-    public function desc($description)
-    {
-        $this->description = $description;
-        return $this;
     }
 
     /**
