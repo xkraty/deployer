@@ -63,7 +63,7 @@ class Deployer
         $this->input = $input;
         $this->output = $output;
         $this->tasks = new TaskCollection();
-        $this->servers = new ScenarioCollection();
+        $this->scenarios = new ScenarioCollection();
         $this->servers = new ServerCollection();
         self::$instance = $this;
     }

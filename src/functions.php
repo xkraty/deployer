@@ -5,11 +5,10 @@
  * file that was distributed with this source code.
  */
 use Deployer\Deployer;
-use Deployer\CurrentEnvironment;
-use Deployer\Server;
+use Deployer\Task\GroupTask;
+use Deployer\Task\Scenario\GroupScenario;
 use Deployer\Task\Task;
 use Deployer\Task\Scenario\Scenario;
-use Deployer\Utils;
 
 /**
  * @param string $name
@@ -36,18 +35,19 @@ function task($name, $body)
     if (is_callable($body)) {
         $task = new Task($body);
         $scenario = new Scenario($name);
-        $deployer->getTasks()->set($name, $task);
     } else if (is_array($body)) {
-        $scenario = new Scenario\GroupScenario(array_map(function ($name) use ($deployer) {
+        $task = new GroupTask();
+        $scenario = new GroupScenario(array_map(function ($name) use ($deployer) {
             return $deployer->getScenarios()->get($name);
         }, $body));
     } else {
         throw new InvalidArgumentException('Task should be an closure or array of other tasks.');
     }
 
+    $deployer->getTasks()->set($name, $task);
     $deployer->getScenarios()->set($name, $scenario);
 
-    return $scenario;
+    return $task;
 }
 
 /**
