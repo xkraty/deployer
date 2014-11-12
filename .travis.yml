@@ -10,6 +10,4 @@ matrix:
     allow_failures:
         - php: hhvm
 
-before_script: 
-  - chmod +x test/before_script.sh
-  - test/before_script.sh
+before_script: bash test/before_script.sh
