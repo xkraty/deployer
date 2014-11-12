@@ -1,7 +1,7 @@
-if type php > /dev/null; then
+if ! type hhvm > /dev/null; then
   sudo apt-get update -qq 
   sudo apt-get install -y -qq libssh2-1-dev libssh2-php
-  pecl install -f ssh2-beta < .noninteractive
+  pecl install -f ssh2-beta < test/.noninteractive
   php -m | grep ssh2
 fi  
 
