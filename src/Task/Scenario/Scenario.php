@@ -35,7 +35,7 @@ class Scenario
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
     public function getTasks()
     {
