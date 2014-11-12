@@ -7,7 +7,7 @@ else
   php -m | grep ssh2
 fi;
 
-travis_retry composer self-update
-travis_retry composer install --no-interaction --prefer-source --dev
+composer self-update
+composer install --no-interaction --prefer-source --dev
 
 echo `whoami`":1234" | sudo chpasswd
