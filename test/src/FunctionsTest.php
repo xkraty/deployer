@@ -44,4 +44,26 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('InvalidArgumentException', 'Task should be an closure or array of other tasks.');
         task('wrong', 'thing');
     }
+    
+    public function testBefore()
+    {
+        task('main', function () {});
+        task('before', function () {});
+        before('main', 'before');
+        
+        $mainScenario = $this->deployer->getScenarios()->get('main');
+        $this->assertInstanceOf('Deployer\Task\Scenario\Scenario', $mainScenario);
+        $this->assertEquals(['before', 'main'], $mainScenario->getTasks());
+    }
+    
+    public function testAfter()
+    {
+        task('main', function () {});
+        task('after', function () {});
+        after('main', 'after');
+        
+        $mainScenario = $this->deployer->getScenarios()->get('main');
+        $this->assertInstanceOf('Deployer\Task\Scenario\Scenario', $mainScenario);
+        $this->assertEquals(['main', 'after'], $mainScenario->getTasks());
+    }
 }
