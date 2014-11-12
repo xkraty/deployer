@@ -15,6 +15,4 @@ before_script: bash test/before_script.sh
 script:
   - phpunit --coverage-clover=coverage.clover
 
-after_script: 
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+after_script: bash test/after_script.sh
