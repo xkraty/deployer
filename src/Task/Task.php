@@ -31,7 +31,7 @@ class Task
     }
 
     /**
-     * {@inheritdoc}
+     * Run task.
      */
     public function run()
     {
