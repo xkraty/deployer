@@ -7,8 +7,6 @@
 
 namespace Deployer\Server;
 
-use Ssh;
-
 class Configuration
 {
     const AUTH_BY_PASSWORD = 0;
