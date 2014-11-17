@@ -38,7 +38,7 @@ abstract class AbstractServer implements ServerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function getName()
     {
@@ -46,7 +46,7 @@ abstract class AbstractServer implements ServerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return Configuration
      */
     public function getConfiguration()
     {
@@ -54,10 +54,31 @@ abstract class AbstractServer implements ServerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return Enviroment
      */
     public function getEnvironment()
     {
         return $this->environment;
     }
+    
+    /**
+     * Run shell command on remote server.
+     * @param string $command
+     * @return string Output of command.
+     */
+    abstract public function run($command);
+    
+    /**
+     * Upload file to remote server.
+     * @param string $local Local path to file.
+     * @param string $remote Remote path where upload.
+     */
+    abstract public function upload($local, $remote);
+    
+    /**
+     * Download file from remote server.
+     * @param string $local Where to download file on local machine.
+     * @param string $remote Which file to download from remote server.
+     */
+    abstract public function download($local, $remote);
 }
