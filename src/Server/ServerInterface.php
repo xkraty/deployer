@@ -17,7 +17,7 @@ interface ServerInterface
     public function getConfiguration();
 
     /**
-     * @return CurrentEnvironment
+     * @return Environment
      */
     public function getEnvironment();
 
