@@ -18,7 +18,7 @@ use Deployer\Task\Scenario\Scenario;
  * @param string $name
  * @param string $domain
  * @param int $port
- * @return Server\
+ * @return Builder
  */
 function server($name, $domain, $port = 22)
 {
