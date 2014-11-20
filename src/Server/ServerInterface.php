@@ -7,8 +7,6 @@
 
 namespace Deployer\Server;
 
-use Deployer\CurrentEnvironment;
-
 interface ServerInterface
 {
     /**
