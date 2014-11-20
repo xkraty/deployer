@@ -30,6 +30,24 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
         $this->deployer = null;
     }
 
+    public function testServer()
+    {
+        server('main', 'domain.com', 22);
+        
+        $server = $this->deployer->getServers()->get('main');
+        $this->assertInstanceOf('Deployer\Server\AbstractServer', $server);
+        $this->assertInstanceOf('Deployer\Server\Configuration', $server->getConfiguration());
+        $this->assertInstanceOf('Deployer\Server\Environment', $server->getEnvironment());
+    }
+
+    public function testServerGroups()
+    {
+        serverGroup('main', ['one', 'two']);
+
+        $list = $this->deployer->getServerGroups()->get('main');
+        $this->assertEquals(['one', 'two'], $list);
+    }
+
     public function testTask()
     {
         task('task', function () {});

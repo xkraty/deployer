@@ -22,7 +22,6 @@ class Task
     private $description;
 
     /**
-     * @param string $name Task name.
      * @param callable $callback Task code.
      */
     public function __construct(\Closure $callback)

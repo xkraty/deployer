@@ -7,6 +7,7 @@
 
 namespace Deployer\Collection;
 
+use Deployer\Server\GroupCollection;
 use Deployer\Server\ServerCollection;
 use Deployer\Task\Scenario\ScenarioCollection;
 use Deployer\Task\TaskCollection;
@@ -20,6 +21,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
             [new TaskCollection()],
             [new ScenarioCollection()],
             [new ServerCollection()],
+            [new GroupCollection()],
         ];
     }
 

@@ -7,6 +7,8 @@
 
 namespace Deployer;
 
+use Deployer\Console\TaskCommand;
+use Deployer\Server\GroupCollection;
 use Deployer\Server\ServerCollection;
 use Deployer\Task\Scenario\ScenarioCollection;
 use Deployer\Task\TaskCollection;
@@ -53,7 +55,12 @@ class Deployer
     private $servers;
 
     /**
-     * @param Console $app
+     * @var GroupCollection
+     */
+    private $serverGroups;
+    
+    /**
+     * @param Console $console
      * @param InputInterface $input
      * @param OutputInterface $output
      */
@@ -65,6 +72,7 @@ class Deployer
         $this->tasks = new TaskCollection();
         $this->scenarios = new ScenarioCollection();
         $this->servers = new ServerCollection();
+        $this->serverGroups = new GroupCollection();
         self::$instance = $this;
     }
 
@@ -92,8 +100,7 @@ class Deployer
     public function transformTasksToConsoleCommands()
     {
         foreach ($this->tasks as $name => $task) {
-            $command = new RunTaskCommand($name, $task, $this);
-            $this->console->add($command);
+            $this->console->add(new TaskCommand($name, $task, $this));
         }
     }
 
@@ -143,5 +150,13 @@ class Deployer
     public function getServers()
     {
         return $this->servers;
+    }
+
+    /**
+     * @return GroupCollection
+     */
+    public function getServerGroups()
+    {
+        return $this->serverGroups;
     }
 }

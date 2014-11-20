@@ -12,11 +12,6 @@ use Deployer\CurrentEnvironment;
 interface ServerInterface
 {
     /**
-     * @return string
-     */
-    public function getName();
-
-    /**
      * @return Configuration
      */
     public function getConfiguration();

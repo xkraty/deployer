@@ -5,20 +5,48 @@
  * file that was distributed with this source code.
  */
 use Deployer\Deployer;
+use Deployer\Server\Remote;
+use Deployer\Server\Builder;
+use Deployer\Server\Configuration;
+use Deployer\Server\Environment;
+use Deployer\Task\Task as TheTask;
 use Deployer\Task\GroupTask;
 use Deployer\Task\Scenario\GroupScenario;
-use Deployer\Task\Task;
 use Deployer\Task\Scenario\Scenario;
 
 /**
  * @param string $name
  * @param string $domain
  * @param int $port
- * @return Server\Configuration
+ * @return Server\
  */
 function server($name, $domain, $port = 22)
 {
-    return Server\ServerFactory::create($name, $domain, $port);
+    $deployer = Deployer::get();
+    
+    $env = new Environment();
+    $config = new Configuration($name, $domain, $port);
+    
+    if (function_exists('ssh2_exec')) {
+        $server = new Remote\SshExtension($config, $env);
+    } else {
+        $server = new Remote\PhpSecLib($config, $env);
+    }
+    
+    $deployer->getServers()->set($name, $server);
+    
+    return new Builder($config, $env);
+}
+
+/**
+ * @param string $name
+ * @param array $servers
+ */
+function serverGroup($name, $servers) 
+{
+    $deployer = Deployer::get();
+    
+    $deployer->getServerGroups()->set($name, $servers);
 }
 
 /**
@@ -26,14 +54,15 @@ function server($name, $domain, $port = 22)
  *
  * @param string $name Name of current task.
  * @param callable|array $body Callable task or array of other tasks names.
- * @return Task
+ * @return TheTask
+ * @throws InvalidArgumentException
  */
 function task($name, $body)
 {
     $deployer = Deployer::get();
 
     if (is_callable($body)) {
-        $task = new Task($body);
+        $task = new TheTask($body);
         $scenario = new Scenario($name);
     } else if (is_array($body)) {
         $task = new GroupTask();

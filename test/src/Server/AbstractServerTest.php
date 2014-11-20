@@ -17,12 +17,10 @@ class AbstractServerTest extends \PHPUnit_Framework_TestCase
         $env = $this->getMock('Deployer\Server\Environment');
 
         $server = $this->getMockForAbstractClass('Deployer\Server\AbstractServer', [
-            'name',
             $config,
             $env,
         ]);
 
-        $this->assertEquals('name', $server->getName());
         $this->assertEquals($config, $server->getConfiguration());
         $this->assertEquals($env, $server->getEnvironment());
     }
